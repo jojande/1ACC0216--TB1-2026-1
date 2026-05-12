@@ -450,6 +450,31 @@ p2 <- ggplot(parking_summary, aes(x = parking_factor, y = n, fill = parking_fact
 
 p2
 
+# ==============================================================================
+# PREGUNTA #8: DISTRIBUCIÓN DE PRECIOS POR TIPO DE HOTEL
+# ==============================================================================
+
+# 1. Crear el gráfico de densidad para comparar ADR
+p_densidad_adr <- ggplot(df, aes(x = adr, fill = hotel)) +
+  geom_density(alpha = 0.5) + # Alpha para ver la transparencia donde se cruzan
+  scale_fill_manual(values = c("City Hotel" = "#2c7fb8", "Resort Hotel" = "#7fcdbb")) +
+  labs(title = "Distribución de la Tarifa Diaria (ADR) por Tipo de Hotel",
+       subtitle = "Comparativa de la concentración de precios tras la limpieza de outliers",
+       x = "Tarifa Diaria Promedio (ADR)",
+       y = "Densidad (Frecuencia Relativa)",
+       fill = "Tipo de Hotel") +
+  theme_minimal()
+
+# Mostrar el gráfico
+print(p_densidad_adr)
+
+# 2. Resumen estadístico para apoyar el gráfico
+resumen_precios <- df %>%
+  group_by(hotel) %>%
+  summarise(Precio_Medio = mean(adr),
+            Precio_Mediano = median(adr))
+print(resumen_precios
+
 
 #-------------------------------------------------------------------------------------------
 #-------------------------- GUARDAR EL DATASET FINAL LIMPIO --------------------------------
